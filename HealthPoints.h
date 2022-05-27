@@ -18,24 +18,14 @@ public:
      *
      * @param HP Amount of HP to assign.
      */
-    HealthPoints(int HP = 100) {
-        if (HP <= 0) {
-            throw HealthPoints::InvalidArgument();
-        } else {
-            m_maxHP = HP;
-            m_currentHP = HP;
-        }
-    }
+    HealthPoints(int HP = DEFAULT_MAX_HP);
 
     /**
      *@brief Copy C'tor
      *
      * @param other Other HealthPoints to copy from.
      */
-    HealthPoints(const HealthPoints& other):
-        m_maxHP(other.m_maxHP),
-        m_currentHP(other.m_currentHP)
-    {}
+    HealthPoints(const HealthPoints& other);
 
     /**
      * @brief D'tor
@@ -49,14 +39,7 @@ public:
      * @return
      */
 
-    HealthPoints& operator=(const HealthPoints& other){
-        if(this == &other){
-            return *this;
-        }
-        this->m_maxHP = other.m_maxHP;
-        this->m_currentHP = other.m_currentHP;
-        return *this;
-    };
+    HealthPoints& operator=(const HealthPoints& other);
 
     /**
      * @brief = operator with an int.
@@ -65,16 +48,7 @@ public:
      * @return
      */
 
-    HealthPoints& operator=(const int HP){
-        if(HP <= 0){
-            throw HealthPoints::InvalidArgument();
-        }
-        else{
-            this->m_maxHP = HP;
-            this->m_currentHP = HP;
-        }
-        return *this;
-    };
+    HealthPoints& operator=(const int HP);
 
     /**
      * @brief - operator with another HealthPoints object.
@@ -83,14 +57,7 @@ public:
      * @return
      */
 
-    HealthPoints& operator-=(const HealthPoints& other){
-        if(this->m_currentHP - other.m_currentHP <= 0){
-            this->m_currentHP = 0;
-            return *this;
-        }
-       this->m_currentHP = this->m_currentHP - other.m_currentHP;
-       return *this;
-    }
+    HealthPoints& operator-=(const HealthPoints& other);
 
     /**
      * @brief - operator with an int
@@ -117,14 +84,7 @@ public:
      * @return
      */
 
-    HealthPoints& operator+=(const HealthPoints& other){
-        if(this->m_currentHP + other.m_currentHP >= this->m_maxHP){
-            this->m_currentHP = this->m_maxHP;
-            return *this;
-        }
-        this->m_currentHP = this->m_currentHP + other.m_currentHP;
-        return *this;
-    }
+    HealthPoints& operator+=(const HealthPoints& other);
 
     /**
      * @brief += operator with an int
@@ -152,10 +112,7 @@ public:
      * @return
      */
 
-    friend HealthPoints& operator-(HealthPoints& lhs, const HealthPoints& rhs){
-        lhs -= rhs;
-        return lhs;
-    }
+    friend HealthPoints& operator-(HealthPoints& lhs, const HealthPoints& rhs);
 
     /**
      *@brief - operator with two HealthPoints objects.
@@ -181,10 +138,7 @@ public:
      * @return
      */
 
-    friend HealthPoints& operator+(HealthPoints& lhs, const HealthPoints& rhs){
-        lhs += rhs;
-        return lhs;
-    }
+    friend HealthPoints& operator+(HealthPoints& lhs, const HealthPoints& rhs);
 
     /**
      *@brief + operator with an int and a HealthPoints object.
@@ -194,45 +148,21 @@ public:
      * @return
      */
 
-    friend HealthPoints& operator+(int HP, HealthPoints& rhs){
-        rhs += HP;
-        return rhs;
-    }
+    friend HealthPoints& operator+(int HP, HealthPoints& rhs);
 
-    friend bool operator==(const HealthPoints& lhs, const HealthPoints& rhs){
-        if(lhs.m_currentHP == rhs.m_currentHP){
-            return true;
-        }
-        return false;
-    }
+    friend bool operator==(const HealthPoints& lhs, const HealthPoints& rhs);
 
-    friend bool operator!=(const HealthPoints& lhs, const HealthPoints& rhs){
-        return !(lhs == rhs);
-    }
+    friend bool operator!=(const HealthPoints& lhs, const HealthPoints& rhs);
 
-    friend bool operator<(const HealthPoints& lhs, const HealthPoints& rhs){
-        if(lhs.m_currentHP < rhs.m_currentHP){
-            return true;
-        }
-        return false;
-    }
+    bool operator<(const HealthPoints& rhs);
 
-    friend bool operator>(const HealthPoints& lhs, const HealthPoints& rhs){
-        return rhs < lhs;
-    }
+    friend bool operator>(const HealthPoints& lhs, const HealthPoints& rhs);
 
-    friend bool operator<=(const HealthPoints& lhs, const HealthPoints& rhs){
-        return !(rhs < lhs);
-    }
+    friend bool operator<=(const HealthPoints& lhs, const HealthPoints& rhs);
 
-    friend bool operator>=(const HealthPoints& lhs, const HealthPoints& rhs){
-        return !(lhs < rhs);
-    }
+    friend bool operator>=(const HealthPoints& lhs, const HealthPoints& rhs);
 
-    friend std::ostream& operator<<(std::ostream& os, const HealthPoints HP){
-        os << HP.m_currentHP << "(" << HP.m_maxHP << ")";
-        return os;
-    }
+    friend std::ostream& operator<<(std::ostream& os, const HealthPoints HP);
 
 };
 
